@@ -6,17 +6,14 @@ import de.neuland.jade4j.spring.view.JadeViewResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@EnableWebMvc
-public class JadeTemplateConfiguration {
-
+public class TemplateConfiguration {
     @Bean
     public SpringTemplateLoader templateLoader() {
         SpringTemplateLoader templateLoader
                 = new SpringTemplateLoader();
-        templateLoader.setBasePath("/views/");
+        templateLoader.setBasePath("/template/");
         templateLoader.setSuffix(".jade");
         return templateLoader;
     }
