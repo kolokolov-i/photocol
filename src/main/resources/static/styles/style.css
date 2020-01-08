@@ -1,0 +1,13 @@
+body {
+    background-image: url(/images/bg.png);
+}
+
+#logo-holder {
+    width: 130px;
+    height: 40px;
+}
+
+#logo-holder img {
+    width: 50%;
+    height: 50%;
+}
