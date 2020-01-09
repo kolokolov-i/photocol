@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -13,34 +14,36 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                    .antMatchers("/", "/index", "/images/*", "/styles/*", "/scripts/*").permitAll()
-                    .anyRequest().authenticated()
-                    .and()
-                .formLogin()
-                    .loginPage("/login").permitAll()
-                    .and()
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/index")
-                    .and()
-                .csrf().disable();
-//        http
 //                .authorizeRequests()
-//                .antMatchers("/", "/index", "/images/*", "/styles/*", "/scripts/*").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
+//                    .antMatchers("/", "/index", "/images/*", "/styles/*", "/scripts/*").permitAll()
+//                    .anyRequest().authenticated()
+//                    .and()
 //                .formLogin()
-//                .loginPage("/login")
-//                .permitAll()
+//                    .loginPage("/login")
+//                    .permitAll()
+//                    .and()
+                .csrf().disable()
+//                .authorizeRequests()
+//                .antMatchers("/", "/index", "/login").permitAll()
 //                .and()
-//                .rememberMe();
+//                .formLogin().loginPage("/login").loginProcessingUrl("/login").permitAll()
+//                .and().logout().permitAll()
+//                .logoutSuccessUrl("/")
+                ;
     }
 
-//    @Autowired
-//    public void configureGlobal(
-//            AuthenticationManagerBuilder auth) throws Exception {
-//        auth
-//                .inMemoryAuthentication()
-//                .withUser("user@foo").password("password").roles("USER").and()
-//                .withUser("admin@foo").password("password").roles("USER", "ADMIN");
-//    }
+    @Autowired
+    public void configure(
+            AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .inMemoryAuthentication()
+                .withUser("cat").password("mew").roles("USER").and()
+                .withUser("dog").password("gaw").roles("USER");
+    }
+
+    @Override
+    public void configure(WebSecurity web) {
+        web.ignoring()
+                .antMatchers("/scripts/**", "/styles/**", "/images/**");
+    }
 }
