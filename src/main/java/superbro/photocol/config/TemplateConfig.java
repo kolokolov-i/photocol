@@ -1,4 +1,4 @@
-package superbro.photocol;
+package superbro.photocol.config;
 
 import de.neuland.jade4j.JadeConfiguration;
 import de.neuland.jade4j.spring.template.SpringTemplateLoader;
@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ViewResolver;
 
 @EnableWebSecurity
 @Configuration
-public class TemplateConfiguration {
+public class TemplateConfig {
     @Bean
     public SpringTemplateLoader templateLoader() {
         SpringTemplateLoader templateLoader = new SpringTemplateLoader();

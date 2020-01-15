@@ -6,10 +6,10 @@ block navbar
 - js_message = #{message}
 block content
     #login-form-holder
-        form(action='/login', method='post')
-            input(type='text', name='login')
+        form(action='/j_spring_security_check', method='post')
+            input(type='text', name='username')
             input(type='password', name='password')
             if js_message
                 #login-form-message #{message}
             input(type='submit', value='Войти')
-            //-input(type='hidden', name='_csrf', value='#{_csrf}')
+            //-input(type='hidden', value='#{_csrf}', name='_csrf')
