@@ -1,0 +1,14 @@
+#form-holder {
+    top: 20px;
+    margin: auto;
+    background-color: white;
+    width: 230px;
+    position: relative;
+    border: 1px solid #1994e6;
+    padding: 20px;
+}
+
+.form-item{
+    display: block;
+
+}

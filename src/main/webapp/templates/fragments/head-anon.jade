@@ -1,9 +1,7 @@
 extends head.jade
 
-block navbar-btn-a
-    a(href='/login')
-        #navbat-btn-login Вход
-
-block navbar-btn-b
-    a(href='/registrate')
-        #navbar-btn-reg Регистрация
+block navbar-btns
+    a.navbar-item.navbar-btn(href='/login')
+        p Вход
+    a.navbar-item.navbar-btn(href='/registrate')
+        p Регистрация

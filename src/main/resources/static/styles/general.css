@@ -1,0 +1,62 @@
+body {
+    background-image: url(/images/bg.png);
+    margin: 0;
+    font-family: Segoe UI;
+    font-weight: 100;
+}
+
+#navbar {
+    background-color: #1994e6;
+    color: white;
+    overflow: auto;
+    display: flex;
+}
+
+.navbar-item {
+    border-width: 2px;
+    border-style: outset;
+    border-color: #47a9eb;
+}
+
+.navbar-item:hover {
+    border-style: inset;
+}
+
+#logo-holder {
+    width: 130px;
+    height: 40px;
+    float: left;
+}
+
+#logo-holder a {
+    display: block;
+}
+
+#logo-holder img {
+    display: block;
+    margin: auto;
+    width: 115px;
+    height: 40px;
+}
+
+#header {
+    margin: auto;
+}
+
+#header p {
+    margin: 5px 0 0;
+    font-size: 16pt;
+    font-weight: 500;
+}
+
+#btn-group .navbar-btn {
+    display: inline-block;
+    box-sizing: border-box;
+    height: 100%;
+    color: white;
+}
+
+#btn-group .navbar-btn p {
+    margin: 12px 5px 0;
+    display: inline-block;
+}

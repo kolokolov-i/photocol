@@ -3,7 +3,8 @@ html
     head
         title Photocol - #{title}
         script(src='/scripts/general.js')
-        link(rel='stylesheet' href='/styles/style.css')
+        block head-styles
+            link(rel='stylesheet' href='/styles/general.css')
     body
         block navbar
         block sidebar

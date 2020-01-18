@@ -33,13 +33,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.authorizeRequests().antMatchers("/", "/login", "/logout").permitAll();
         http.authorizeRequests().antMatchers("/hello").hasRole("USER");
-//        http.authorizeRequests().antMatchers("/admin").hasRole("ADMIN");
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
         http.authorizeRequests().and().formLogin()
                 .loginProcessingUrl("/j_spring_security_check")
                 .loginPage("/login")
                 .defaultSuccessUrl("/hello")
-                .failureUrl("/login?error=true")
+                .failureUrl("/login-error")
                 .usernameParameter("username")
                 .passwordParameter("password");
         http.authorizeRequests().and().logout()

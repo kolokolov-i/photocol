@@ -1,9 +1,7 @@
 extends head.jade
 
-block navbar-btn-a
-    a(href='/albums')
-        #navbat-btn-profile Профиль
-
-block navbar-btn-b
-    a(href='/exit')
-        #navbar-btn-exit Выход
+block navbar-btns
+    a.navbar-item.navbar-btn(href='/albums')
+        p Профиль
+    a.navbar-item.navbar-btn(href='/exit')
+        p Выход

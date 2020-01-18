@@ -1,15 +1,16 @@
-extends general.jade
+extends fragments/general.jade
 
 block navbar
     include fragments/head-anon.jade
 
-- js_message = #{message}
+block append head-styles
+    link(rel='stylesheet' href='/styles/auth-form.css')
+
 block content
-    #login-form-holder
-        form(action='/j_spring_security_check', method='post')
-            input(type='text', name='username')
-            input(type='password', name='password')
-            if js_message
-                #login-form-message #{message}
-            input(type='submit', value='Войти')
-            //-input(type='hidden', value='#{_csrf}', name='_csrf')
+    #form-holder
+        form(action='/j_spring_security_check', method='post', id='formLogin', hidden)
+        input.form-item(type='text', name='username', form='formLogin')
+        input.form-item(type='password', name='password', form='formLogin')
+        .form-item #{message}
+        input.form-item(type='submit', value='Войти', form='formLogin')
+        //-input(type='hidden', value='#{_csrf}', name='_csrf')

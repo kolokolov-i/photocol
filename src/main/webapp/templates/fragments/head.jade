@@ -1,10 +1,8 @@
 #navbar
-    #logo-holder
+    #logo-holder.navbar-item
         a(href='/')
             img(src='/images/logo.png')
-    #header #{title}
+    #header
+        p #{title}
     #btn-group
-        #navbar-btn-a
-            block navbar-btn-a
-        #navbar-btn-b
-            block navbar-btn-b
+        block navbar-btns
