@@ -9,8 +9,16 @@ block append head-styles
 block content
     #form-holder
         form(action='/j_spring_security_check', method='post', id='formLogin', hidden)
-        input.form-item(type='text', name='username', form='formLogin')
-        input.form-item(type='password', name='password', form='formLogin')
-        .form-item #{message}
-        input.form-item(type='submit', value='Войти', form='formLogin')
+        .edit-group.form-item
+            .input-icon
+                i.fas.fa-user
+            input(type='text', name='username', form='formLogin', placeholder='Логин')
+        .edit-group.form-item
+            .input-icon
+                i.fas.fa-key
+            input(type='password', name='password', form='formLogin', placeholder='Пароль')
+        //.form-item
+            .message-error #{message}
+        .form-item
+            input(type='submit', value='Войти', form='formLogin')
         //-input(type='hidden', value='#{_csrf}', name='_csrf')
