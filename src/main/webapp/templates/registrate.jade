@@ -1,0 +1,28 @@
+extends fragments/general.jade
+
+block navbar
+    include fragments/head-anon.jade
+
+block append head-styles
+    link(rel='stylesheet' href='/styles/auth-form.css')
+
+block content
+    #form-holder
+        form(action='/registrate', method='post', id='formRegistrate', hidden)
+        .edit-group.form-item
+            .input-icon
+                i.fas.fa-user
+            input(type='text', name='username', form='formRegistrate', placeholder='Логин')
+        .edit-group.form-item
+            .input-icon
+                i.fas.fa-key
+            input(type='password', name='password', form='formRegistrate', placeholder='Пароль')
+        .edit-group.form-item
+            .input-icon
+                i.fas.fa-key
+            input(type='password', name='repeat', form='formRegistrate', placeholder='Повторите пароль')
+        //.form-item
+            .message-error #{message}
+        .form-item
+            input(type='submit', value='Зарегистрироваться', form='formRegistrate')
+        //-input(type='hidden', value='#{_csrf}', name='_csrf')
