@@ -35,14 +35,14 @@ public class LoginController {
         return "login";
     }
 
-    @GetMapping("/hello")
-    public String hello(Principal principal, Model model) {
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-        String userInfo = loginedUser.getUsername();
-        model.addAttribute("name", userInfo);
-        model.addAttribute("title", "Привет");
-        return "hello";
-    }
+//    @GetMapping("/hello")
+//    public String hello(Principal principal, Model model) {
+//        User loginedUser = (User) ((Authentication) principal).getPrincipal();
+//        String userInfo = loginedUser.getUsername();
+//        model.addAttribute("name", userInfo);
+//        model.addAttribute("title", "Привет");
+//        return "hello";
+//    }
 
     @GetMapping(value = "/logoutSuccessful")
     public String logoutSuccessfulPage(Model model) {

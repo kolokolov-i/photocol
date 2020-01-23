@@ -1,5 +1,6 @@
 package superbro.photocol.controller;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,9 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IndexController {
 
     @GetMapping("/")
-    public String index(Model model) {
-        model.addAttribute("title", "Главная");
-        return "index";
+    public String index(Authentication authentication) {
+//        model.addAttribute("title", "Главная");
+//        return "index";
+        if(authentication != null && authentication.isAuthenticated()){
+            return "redirect:/albums";
+        }
+        else {
+            return "redirect:/login";
+        }
     }
 
 }

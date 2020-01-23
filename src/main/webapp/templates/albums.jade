@@ -1,4 +1,13 @@
-extends fragments/general.jade
+extends /fragments/gallery.jade
 
-block navbar
-    include fragments/head-auth.jade
+block append head-scripts
+    script(src='/scripts/albums.js')
+
+block sidebar
+    #sidebar
+        #info-pane
+            p Описание профиля
+            p Дата регистрации: 00.00.2020
+        #btn-pane
+            .btn Редактировать профиль
+            .btn Добавить альбом
