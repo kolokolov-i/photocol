@@ -1,0 +1,34 @@
+#sidebar {
+    display: block;
+    position: fixed;
+    background-color: #ffffff;
+    border-right: 1px solid var(--main-color);
+    width: 220px;
+    height: 100%;
+    font-size: 11pt;
+}
+
+#side-fantom {
+    display: block;
+    position: fixed;
+    z-index: -10;
+    height: 100%;
+    width: 220px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+
+#info-pane p {
+    margin: 5px 10px;
+}
+
+#btn-pane .btn {
+    border-top: 1px solid var(--main-color);
+    border-bottom: 1px solid var(--main-color);
+    margin-bottom: -1px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+#btn-pane .btn:hover {
+    background-color: var(--hover-color);
+}

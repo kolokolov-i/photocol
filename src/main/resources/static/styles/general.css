@@ -1,5 +1,5 @@
 :root {
-  --main-color: #55aaff;
+  --main-color: #2873bd;
   --hover-color: #f0f0f0;
   --second-color: #cccccc;
 }
@@ -7,7 +7,7 @@
 body {
     background-image: url(/images/bg.png);
     margin: 0;
-    font-family: Segoe UI;
+    font-family: 'Roboto', sans-serif;
     font-weight: 100;
 }
 
