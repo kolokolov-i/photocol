@@ -7,18 +7,19 @@ block append head-styles
     link(rel='stylesheet' href='/styles/auth-form.css')
 
 block content
-    #form-holder
-        form(action='/j_spring_security_check', method='post', id='formLogin', hidden)
-        .edit-group.form-item
-            .input-icon
-                i.fas.fa-user
-            input(type='text', name='username', form='formLogin', placeholder='Логин')
-        .edit-group.form-item
-            .input-icon
-                i.fas.fa-key
-            input(type='password', name='password', form='formLogin', placeholder='Пароль')
-        //.form-item
-            .message-error #{message}
-        .form-item
-            input(type='submit', value='Войти', form='formLogin')
-        //-input(type='hidden', value='#{_csrf}', name='_csrf')
+    div(style='width: 100%; position: absolute; top: 40px;')
+        #form-holder
+            form(action='/j_spring_security_check', method='post', id='formLogin', hidden)
+            .edit-group.form-item
+                .input-icon
+                    i.fas.fa-user
+                input(type='text', name='username', form='formLogin', placeholder='Логин')
+            .edit-group.form-item
+                .input-icon
+                    i.fas.fa-key
+                input(type='password', name='password', form='formLogin', placeholder='Пароль')
+            //.form-item
+                .message-error #{message}
+            .form-item
+                input(type='submit', value='Войти', form='formLogin')
+            //-input(type='hidden', value='#{_csrf}', name='_csrf')

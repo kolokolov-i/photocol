@@ -14,6 +14,8 @@ body {
 #navbar {
     background-color: white;
     color: var(--main-color);
+    position: fixed;
+    width: 100%;
     overflow: auto;
     display: flex;
     border-bottom: 1px solid var(--main-color);
