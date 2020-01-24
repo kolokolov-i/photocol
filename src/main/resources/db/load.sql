@@ -10,3 +10,6 @@ INSERT INTO user_role (id, app_user, role)
 VALUES (1, 1, 1),
        (2, 1, 2),
        (3, 2, 2);
+
+INSERT INTO album (id, name, description, owner)
+VALUES (1, 'Первый', 'Первый тестовый альбом', 1);

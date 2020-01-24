@@ -10,8 +10,6 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(Authentication authentication) {
-//        model.addAttribute("title", "Главная");
-//        return "index";
         if(authentication != null && authentication.isAuthenticated()){
             return "redirect:/albums";
         }

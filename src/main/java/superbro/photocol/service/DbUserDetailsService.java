@@ -35,4 +35,8 @@ public class DbUserDetailsService implements UserDetailsService {
         List<GrantedAuthority> grantList = appRoles.stream().map(t -> new SimpleGrantedAuthority(t.getName())).collect(Collectors.toList());
         return new User(appUser.getName(), appUser.getPassword(), grantList);
     }
+
+    public AppUser get(String name){
+        return userRepo.getByName(name);
+    }
 }

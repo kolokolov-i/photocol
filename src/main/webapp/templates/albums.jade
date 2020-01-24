@@ -12,3 +12,10 @@ block sidebar
         #btn-pane
             .btn Редактировать профиль
             .btn Добавить альбом
+
+- var albumItems = #{albums}
+block content
+    #albums-list
+        each item in albumItems
+            .album-block
+                .album-name= item.name
