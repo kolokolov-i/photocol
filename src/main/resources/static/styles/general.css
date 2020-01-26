@@ -66,3 +66,8 @@ body {
     margin: 12px 5px 0;
     display: inline-block;
 }
+
+#message-box {
+    border: 1px solid var(--main-color);
+    background-color: white;
+}
