@@ -7,6 +7,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import superbro.photocol.dto.DTOAlbum;
 import superbro.photocol.dto.DTOAlbumItem;
 import superbro.photocol.dto.DTOUserInfo;
 import superbro.photocol.entity.AppUser;
@@ -36,5 +38,15 @@ public class GalleryController {
         model.addAttribute("albums", albums);
         model.addAttribute("info", new DTOUserInfo(albums.size(), 0));
         return "albums";
+    }
+
+    @GetMapping("/album/{albumId}")
+    public String getAlbum(@PathVariable() Integer albumId, Model model, Principal principal){
+        User loginedUser = (User) ((Authentication) principal).getPrincipal();
+        AppUser appUser = userService.get(loginedUser.getUsername());
+        DTOAlbum album = albumService.getAlbum(appUser, albumId);
+        model.addAttribute("title", album.getName());
+        model.addAttribute("album", album);
+        return "album";
     }
 }

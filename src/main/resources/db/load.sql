@@ -15,3 +15,7 @@ INSERT INTO album (id, name, description, owner)
 VALUES (1, 'Первый', 'Первый тестовый альбом', 2),
     (2, 'Второй', 'Второй тестовый альбом', 2),
     (3, 'Третий', 'Третий тестовый альбом', 2);
+
+INSERT INTO photo (id, description, album, path_small, path_full)
+VALUES (1, '001', 1, 's001', 'f001'),
+       (2, '002', 1, 's002', 'f002');

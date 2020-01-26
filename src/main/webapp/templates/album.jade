@@ -1,0 +1,24 @@
+extends /fragments/gallery.jade
+
+block append head-scripts
+    script(src='/scripts/album.js')
+
+block sidebar
+    #side-fantom
+    #sidebar
+        #info-pane
+            p Фотографий всего: #{album.photos.size()}
+        #btn-pane
+            .btn.js-album-edit Редактировать альбом
+            .btn.js-photo-add Добавить фотографии
+            .btn.js-photo-delete Удалить фотографии
+            .btn.js-album-delete Удалить альбом
+
+block content
+    #albums-list
+        each item in album.photos
+            .album-block
+                a(href='/photo/#{item.id}')
+                    .album-img
+                        img(src='/preview/#{item.pathPreview}')
+                    .album-name= item.name
