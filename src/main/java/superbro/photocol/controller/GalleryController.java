@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import superbro.photocol.dto.DTOAlbumItem;
+import superbro.photocol.dto.DTOUserInfo;
 import superbro.photocol.entity.AppUser;
 import superbro.photocol.service.AlbumsService;
 import superbro.photocol.service.DbUserDetailsService;
@@ -33,6 +34,7 @@ public class GalleryController {
         AppUser appUser = userService.get(loginedUser.getUsername());
         List<DTOAlbumItem> albums = albumService.getUserAlbums(appUser);
         model.addAttribute("albums", albums);
+        model.addAttribute("info", new DTOUserInfo(albums.size(), 0));
         return "albums";
     }
 }

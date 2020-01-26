@@ -7,11 +7,11 @@ block sidebar
     #side-fantom
     #sidebar
         #info-pane
-            p Описание профиля
-            p Дата регистрации: 00.00.2020
+            p Альбомов всего: #{info.albumsCount}
+            p Фотографий всего: #{info.photosCount}
         #btn-pane
-            .btn Редактировать профиль
-            .btn Добавить альбом
+            //.btn Редактировать профиль
+            .btn.js-album-add Добавить альбом
 
 albumItems
 block content

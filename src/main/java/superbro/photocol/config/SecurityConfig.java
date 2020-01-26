@@ -32,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests().antMatchers("/", "/login", "/logout").permitAll();
+        http.authorizeRequests().antMatchers("/file/*").permitAll();
         http.authorizeRequests().antMatchers("/albums", "/album/*", "/photo/*").hasRole("USER");
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
         http.authorizeRequests().and().formLogin()
