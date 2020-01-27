@@ -15,10 +15,10 @@ public interface RoleRepo extends JpaRepository<AppRole, Short> {
 
     @Query(
             "select r " +
-                    "from UserRole ur " +
-                    "join ur.user u " +
-                    "join ur.role r " +
-                    "where u.id = :user "
+            "from UserRole ur " +
+            "join ur.user u " +
+            "join ur.role r " +
+            "where u.id = :user "
     )
     List<AppRole> findRolesForUser(@Param("user") Integer userId);
 }

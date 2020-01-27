@@ -30,20 +30,21 @@ CREATE TABLE user_role
 
 CREATE TABLE album
 (
-  id          SERIAL4      NOT NULL PRIMARY KEY,
-  name        VARCHAR(100) NOT NULL UNIQUE CHECK ( name <> '' ),
-  description VARCHAR(500),
-  owner       INT          NOT NULL REFERENCES app_user (id),
-  path_small  VARCHAR(100),
-  attributes  HSTORE
+  id           SERIAL4      NOT NULL PRIMARY KEY,
+  name         VARCHAR(100) NOT NULL UNIQUE CHECK ( name <> '' ),
+  description  VARCHAR(500),
+  owner        INT          NOT NULL REFERENCES app_user (id),
+  path_preview VARCHAR(100),
+  attributes   HSTORE
 );
 
 CREATE TABLE photo
 (
-  id          SERIAL4 NOT NULL PRIMARY KEY,
-  description VARCHAR(500),
-  album       INT     NOT NULL REFERENCES album (id),
-  path_small  VARCHAR(100),
-  path_full   VARCHAR(100),
-  attributes  HSTORE
+  id           SERIAL4 NOT NULL PRIMARY KEY,
+  name         VARCHAR(100),
+  description  VARCHAR(500),
+  album        INT     NOT NULL REFERENCES album (id),
+  path_preview VARCHAR(100),
+  path_full    VARCHAR(100),
+  attributes   HSTORE
 );

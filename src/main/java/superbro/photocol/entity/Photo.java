@@ -20,11 +20,12 @@ public class Photo {
     @Id
     @GeneratedValue
     private int id;
+    private String name;
     private String description;
     @JoinColumn(name = "album", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Album album;
-    @Column(name = "path_small")
+    @Column(name = "path_preview")
     private String pathPreview;
     @Column(name = "path_full")
     private String pathFull;

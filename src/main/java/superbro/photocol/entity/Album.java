@@ -27,7 +27,7 @@ public class Album {
     @JoinColumn(name = "owner", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private AppUser user;
-    @Column(name = "path_small")
+    @Column(name = "path_preview")
     private String pathPreview;
 //    @Type(type = "hstore")
 //    private Map<String, String> attributes = new HashMap<>();

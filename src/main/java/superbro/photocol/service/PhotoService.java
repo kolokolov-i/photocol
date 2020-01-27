@@ -17,6 +17,7 @@ public class PhotoService {
     private final PhotoRepo repo;
 
     public List<DTOPhotoItem> getPhotosInAlbum(Album album){
-        return repo.findAllByAlbum(album).stream().map(t -> new DTOPhotoItem(t.getId(), "", t.getPathPreview())).collect(Collectors.toList());
+        return repo.findAllByAlbum(album).stream().map(t -> new DTOPhotoItem(t.getId(), t.getName(), t.getPathPreview())).collect(Collectors.toList());
     }
+
 }

@@ -11,5 +11,7 @@ import java.util.List;
 @Repository
 public interface PhotoRepo extends JpaRepository<Photo, Integer> {
 
-    public List<Photo> findAllByAlbum(@Param("album") Album album);
+    List<Photo> findAllByAlbum(@Param("album") Album album);
+
+    Photo findOneById(@Param("id") Integer id);
 }
