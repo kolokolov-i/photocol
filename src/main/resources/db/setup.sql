@@ -4,8 +4,6 @@ DROP TABLE IF EXISTS app_role CASCADE;
 DROP TABLE IF EXISTS album CASCADE;
 DROP TABLE IF EXISTS photo CASCADE;
 
-CREATE EXTENSION IF NOT EXISTS hstore;
-
 CREATE TABLE app_user
 (
   id       SERIAL4      NOT NULL PRIMARY KEY,
@@ -34,8 +32,7 @@ CREATE TABLE album
   name         VARCHAR(100) NOT NULL UNIQUE CHECK ( name <> '' ),
   description  VARCHAR(500),
   owner        INT          NOT NULL REFERENCES app_user (id),
-  path_preview VARCHAR(100),
-  attributes   HSTORE
+  path_preview VARCHAR(100)
 );
 
 CREATE TABLE photo
@@ -46,6 +43,5 @@ CREATE TABLE photo
   album        INT     NOT NULL REFERENCES album (id),
   sort         INT DEFAULT 0,
   path_preview VARCHAR(100),
-  path_full    VARCHAR(100),
-  attributes   HSTORE
+  path_full    VARCHAR(100)
 );
