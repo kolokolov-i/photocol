@@ -25,11 +25,15 @@ public class PhotoService {
 
     public DTOPhoto getPhoto(AppUser appUser, int id) {
         Photo photo = repo.findOneById(id);
-//        photo.getAlbum().getUser() // TODO check security for user
-        Photo prev = repo.findOneByAlbumAndSort(photo.getAlbum(), photo.getSort() - 1);
-        Photo next = repo.findOneByAlbumAndSort(photo.getAlbum(), photo.getSort() + 1);
+        Album album = photo.getAlbum();
+        if (album.getUser().getId() != appUser.getId()) {
+            throw new RuntimeException("security");
+        }
+        Photo prev = repo.findOneByAlbumAndSort(album, photo.getSort() - 1);
+        Photo next = repo.findOneByAlbumAndSort(album, photo.getSort() + 1);
         return new DTOPhoto(photo.getId(), photo.getName(),
                 photo.getPathPreview(), photo.getPathFull(),
+                album.getId(), album.getName(),
                 prev == null ? null : new DTOPhotoItem(prev.getId(), prev.getName(), prev.getPathPreview()),
                 next == null ? null : new DTOPhotoItem(next.getId(), next.getName(), next.getPathPreview()));
     }

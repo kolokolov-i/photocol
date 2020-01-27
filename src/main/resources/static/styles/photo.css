@@ -3,8 +3,28 @@
     padding-top: 50px;
 }
 
+#photo-holder img {
+    height: 100%;
+}
+
 #carousel {
     width: 100%;
     bottom: 0;
     height: 150px;
+}
+
+#carousel img {
+    height: 100%;
+}
+
+#prev-photo, #current-photo, #next-photo {
+    display: inline-block;
+}
+
+#current-photo {
+    height: 80px;
+}
+
+#prev-photo, #next-photo {
+    height: 60px;
 }

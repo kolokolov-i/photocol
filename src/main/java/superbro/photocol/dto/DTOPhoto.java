@@ -17,6 +17,8 @@ public class DTOPhoto {
     private String name;
     private String pathPreview;
     private String pathFull;
+    private int albumCode;
+    private String albumName;
     private DTOPhotoItem prev;
     private DTOPhotoItem next;
 }

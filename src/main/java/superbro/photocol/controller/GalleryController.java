@@ -33,7 +33,7 @@ public class GalleryController {
     private final PhotoService photoService;
 
     @GetMapping("/albums")
-    public String albums(Model model, Principal principal){
+    public String albums(Model model, Principal principal) {
         model.addAttribute("title", "Мои альбомы");
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
         AppUser appUser = userService.get(loginedUser.getUsername());
@@ -44,7 +44,7 @@ public class GalleryController {
     }
 
     @GetMapping("/album/{albumId}")
-    public String getAlbum(@PathVariable() Integer albumId, Model model, Principal principal){
+    public String getAlbum(@PathVariable() Integer albumId, Model model, Principal principal) {
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
         AppUser appUser = userService.get(loginedUser.getUsername());
         DTOAlbum album = albumService.getAlbum(appUser, albumId);
@@ -54,11 +54,15 @@ public class GalleryController {
     }
 
     @GetMapping("/photo/{photoId}")
-    public String getPhoto(@PathVariable() Integer photoId, Model model, Principal principal){
+    public String getPhoto(@PathVariable() Integer photoId, Model model, Principal principal) {
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
         AppUser appUser = userService.get(loginedUser.getUsername());
-        DTOPhoto photo = photoService.getPhoto(appUser, photoId);
-        model.addAttribute("photo", photo);
-        return "photo";
+        try {
+            DTOPhoto photo = photoService.getPhoto(appUser, photoId);
+            model.addAttribute("photo", photo);
+            return "photo";
+        } catch (RuntimeException e) {
+            return "redirect:";
+        }
     }
 }
