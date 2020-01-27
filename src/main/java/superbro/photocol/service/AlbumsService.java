@@ -51,4 +51,12 @@ public class AlbumsService {
         album.setDescription(description);
         repo.saveAndFlush(album);
     }
+
+    public void deleteAlbum(AppUser user, Integer albumId) {
+        Album album = repo.findOneByUserAndId(user, albumId);
+        if(album == null){
+            return;
+        }
+        repo.delete(album);
+    }
 }

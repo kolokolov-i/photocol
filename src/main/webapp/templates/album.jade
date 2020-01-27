@@ -14,7 +14,7 @@ block sidebar
             .btn.js-photo-add Добавить фотографии
             .btn.js-photo-delete Удалить фотографии
             .btn.js-album-delete Удалить альбом
-        #editAlbumDialog.dialog-box(style='visibility: hidden;')
+        #editAlbumDialog.dialog-box(style='display: none;')
             .title Редактировать альбом
             form(action='/album_edit', method='post', id='formEditAlbum', hidden)
             input.cell(type='text', name='album_id', value='#{album.id}', form='formEditAlbum', hidden)
@@ -22,6 +22,13 @@ block sidebar
             input.cell(type='text', name='description', form='formEditAlbum', placeholder='Описание')
             .multi-cell
                 input.part-cell(type='submit', value='Изменить', form='formEditAlbum')
+                input.part-cell.js-cancel(type='button', value='Отмена')
+        #deleteAlbumDialog.dialog-box(style='display: none;')
+            .title Удалить альбом ?
+            form(action='/album_delete', method='post', id='formDeleteAlbum', hidden)
+            input.cell(type='text', name='album_id', value='#{album.id}', form='formDeleteAlbum', hidden)
+            .multi-cell
+                input.part-cell(type='submit', value='Удалить', form='formDeleteAlbum')
                 input.part-cell.js-cancel(type='button', value='Отмена')
 
 block content

@@ -59,12 +59,20 @@ public class GalleryController {
 
     @PostMapping("/album_edit")
     public String editAlbum(Principal principal,
-                           @RequestParam(name = "album_id") Integer albumId,
-                           @RequestParam(name = "album_name") String albumName,
-                           @RequestParam(name = "description", required = false) String albumDescription) {
+                            @RequestParam(name = "album_id") Integer albumId,
+                            @RequestParam(name = "album_name") String albumName,
+                            @RequestParam(name = "description", required = false) String albumDescription) {
         AppUser appUser = userService.from(principal);
         albumService.editAlbum(appUser, albumId, albumName, albumDescription);
-        return "redirect:/album/"+albumId;
+        return "redirect:/album/" + albumId;
+    }
+
+    @PostMapping("/album_delete")
+    public String deleteAlbum(Principal principal,
+                              @RequestParam(name = "album_id") Integer albumId) {
+        AppUser appUser = userService.from(principal);
+        albumService.deleteAlbum(appUser, albumId);
+        return "redirect:/albums";
     }
 
     @GetMapping("/photo/{photoId}")

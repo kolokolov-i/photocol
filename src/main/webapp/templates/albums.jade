@@ -12,7 +12,7 @@ block sidebar
         #btn-pane
             //.btn Редактировать профиль
             .btn.js-album-add Добавить альбом
-        #newAlbumDialog.dialog-box(style='visibility: hidden;')
+        #newAlbumDialog.dialog-box(style='display: none;')
             .title Создать новый альбом
             form(action='/album_new', method='post', id='formNewAlbum', hidden)
             input.cell(type='text', name='album_name', form='formNewAlbum', placeholder='Название')
