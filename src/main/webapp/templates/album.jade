@@ -1,18 +1,28 @@
 extends /fragments/gallery.jade
 
 block append head-scripts
-    script(src='/scripts/album.js')
+    script(src='/scripts/albums.js')
 
 block sidebar
     #side-fantom
     #sidebar
         #info-pane
+            p #{album.description}
             p Фотографий всего: #{album.photos.size()}
         #btn-pane
             .btn.js-album-edit Редактировать альбом
             .btn.js-photo-add Добавить фотографии
             .btn.js-photo-delete Удалить фотографии
             .btn.js-album-delete Удалить альбом
+        #editAlbumDialog.dialog-box(style='visibility: hidden;')
+            .title Редактировать альбом
+            form(action='/album_edit', method='post', id='formEditAlbum', hidden)
+            input.cell(type='text', name='album_id', value='#{album.id}', form='formEditAlbum', hidden)
+            input.cell(type='text', name='album_name', form='formEditAlbum', placeholder='Название')
+            input.cell(type='text', name='description', form='formEditAlbum', placeholder='Описание')
+            .multi-cell
+                input.part-cell(type='submit', value='Изменить', form='formEditAlbum')
+                input.part-cell.js-cancel(type='button', value='Отмена')
 
 block content
     #albums-list

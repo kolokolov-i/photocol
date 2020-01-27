@@ -1,10 +1,16 @@
 $(document).ready(function(){
-    $(".js-album-add").on("click", newAlbum);
+    $(".js-album-add").on("click", function (){
+        $("#newAlbumDialog").css("visibility", "visible");
+    });
     $("#newAlbumDialog .js-cancel").on("click", function(){
         $("#newAlbumDialog").css("visibility", "hidden");
     });
-});
 
-function newAlbum(){
-    $("#newAlbumDialog").css("visibility", "visible");
-}
+    $(".js-album-edit").on("click", function (){
+        $("#editAlbumDialog").css("visibility", "visible");
+    });
+    $("#editAlbumDialog .js-cancel").on("click", function(){
+        $("#editAlbumDialog").css("visibility", "hidden");
+    });
+
+});

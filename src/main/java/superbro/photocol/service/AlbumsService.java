@@ -30,13 +30,25 @@ public class AlbumsService {
     public DTOAlbum getAlbum(AppUser user, Integer albumId){
         Album album = repo.findOneByUserAndId(user, albumId);
         DTOAlbum result = new DTOAlbum();
+        result.setId(album.getId());
         result.setName(album.getName());
+        result.setDescription(album.getDescription());
         result.setPhotos(photoService.getPhotosInAlbum(album));
         return result;
     }
 
-    public void newAlbum(AppUser appUser, String albumName, String albumDescription) {
-        Album album = new Album(0, albumName, albumDescription, appUser, null);
+    public void newAlbum(AppUser user, String albumName, String albumDescription) {
+        Album album = new Album(0, albumName, albumDescription, user, null);
+        repo.saveAndFlush(album);
+    }
+
+    public void editAlbum(AppUser user, Integer albumId, String name, String description) {
+        Album album = repo.findOneByUserAndId(user, albumId);
+        if(album == null){
+            return;
+        }
+        album.setName(name);
+        album.setDescription(description);
         repo.saveAndFlush(album);
     }
 }
