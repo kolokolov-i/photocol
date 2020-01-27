@@ -44,6 +44,7 @@ CREATE TABLE photo
   name         VARCHAR(100),
   description  VARCHAR(500),
   album        INT     NOT NULL REFERENCES album (id),
+  sort         INT DEFAULT 0,
   path_preview VARCHAR(100),
   path_full    VARCHAR(100),
   attributes   HSTORE

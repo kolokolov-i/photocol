@@ -14,4 +14,6 @@ public interface PhotoRepo extends JpaRepository<Photo, Integer> {
     List<Photo> findAllByAlbum(@Param("album") Album album);
 
     Photo findOneById(@Param("id") Integer id);
+
+    Photo findOneByAlbumAndSort(@Param("album") Album album, @Param("sort") Integer sort);
 }

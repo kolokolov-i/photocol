@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import superbro.photocol.dto.DTOAlbum;
 import superbro.photocol.dto.DTOAlbumItem;
+import superbro.photocol.dto.DTOPhoto;
 import superbro.photocol.dto.DTOUserInfo;
 import superbro.photocol.entity.AppUser;
 import superbro.photocol.service.AlbumsService;
 import superbro.photocol.service.DbUserDetailsService;
+import superbro.photocol.service.PhotoService;
 
 import java.security.Principal;
 import java.util.List;
@@ -28,6 +30,7 @@ public class GalleryController {
 
     private final DbUserDetailsService userService;
     private final AlbumsService albumService;
+    private final PhotoService photoService;
 
     @GetMapping("/albums")
     public String albums(Model model, Principal principal){
@@ -48,5 +51,14 @@ public class GalleryController {
         model.addAttribute("title", album.getName());
         model.addAttribute("album", album);
         return "album";
+    }
+
+    @GetMapping("/photo/{photoId}")
+    public String getPhoto(@PathVariable() Integer photoId, Model model, Principal principal){
+        User loginedUser = (User) ((Authentication) principal).getPrincipal();
+        AppUser appUser = userService.get(loginedUser.getUsername());
+        DTOPhoto photo = photoService.getPhoto(appUser, photoId);
+        model.addAttribute("photo", photo);
+        return "photo";
     }
 }

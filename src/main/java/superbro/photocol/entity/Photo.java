@@ -25,6 +25,7 @@ public class Photo {
     @JoinColumn(name = "album", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Album album;
+    private int sort;
     @Column(name = "path_preview")
     private String pathPreview;
     @Column(name = "path_full")

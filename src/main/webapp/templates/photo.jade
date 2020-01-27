@@ -1,0 +1,36 @@
+extends /fragments/gallery.jade
+
+block append head-scripts
+    script(src='/scripts/photo.js')
+
+block append head-styles
+    link(rel='stylesheet' href='/styles/photo.css')
+
+block sidebar
+    #side-fantom
+    #sidebar
+        #info-pane
+            p #{photo.name}
+            p #{photo.description}
+        #btn-pane
+            .btn
+                a(href='/album/#{photo.albumId}') #{photo.albumName}
+            .btn
+                a(href='/file/full/#{photo.pathFull}') Скачать
+            .btn.js-delete Удалить
+
+block content
+    #photo-box
+        #photo-holder
+            img(src='/file/full/#{photo.pathFull}')
+        #carousel
+            if photo.prev
+                #prev-photo
+                    a(href='/photo/#{photo.prev.id}')
+                        img(src='/file/preview/#{photo.prev.pathPreview}')
+            #current-photo
+                img(src='/file/preview/#{photo.pathPreview}')
+            if photo.next
+                #next-photo
+                    a(href='/photo/#{photo.next.id}')
+                        img(src='/file/preview/#{photo.next.pathPreview}')
