@@ -81,3 +81,26 @@
 #albums-list .album-block:hover{
     background-color: var(--hover-color);
 }
+
+.dialog-box {
+    margin-left: 10px;
+    border-left: 1px solid var(--main-color);
+    border-bottom: 1px solid var(--main-color);
+    padding: 5px;
+}
+
+#sidebar .cell {
+    margin-bottom: -1px;
+    padding: 5px 10px;
+}
+
+#sidebar .multi-cell {
+    display: flex;
+    align-items: stretch;
+    margin-bottom: -1px;
+    padding: 5px 10px;
+}
+
+#sidebar .part-cell {
+    flex-grow: 1;
+}

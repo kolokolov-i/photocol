@@ -34,4 +34,9 @@ public class AlbumsService {
         result.setPhotos(photoService.getPhotosInAlbum(album));
         return result;
     }
+
+    public void newAlbum(AppUser appUser, String albumName, String albumDescription) {
+        Album album = new Album(0, albumName, albumDescription, appUser, null);
+        repo.saveAndFlush(album);
+    }
 }

@@ -12,6 +12,14 @@ block sidebar
         #btn-pane
             //.btn Редактировать профиль
             .btn.js-album-add Добавить альбом
+        #newAlbumDialog.dialog-box(style='visibility: hidden;')
+            .title Создать новый альбом
+            form(action='/album_new', method='post', id='formNewAlbum', hidden)
+            input.cell(type='text', name='album_name', form='formNewAlbum', placeholder='Название')
+            input.cell(type='text', name='description', form='formNewAlbum', placeholder='Описание')
+            .multi-cell
+                input.part-cell(type='submit', value='Создать', form='formNewAlbum')
+                input.part-cell.js-cancel(type='button', value='Отмена')
 
 albumItems
 block content
@@ -20,5 +28,6 @@ block content
             .album-block
                 a(href='/album/#{item.id}')
                     .album-img
-                        img(src='/file/preview/#{item.pathPreview}')
+                        if item.pathPreview
+                            img(src='/file/preview/#{item.pathPreview}')
                     .album-name= item.name

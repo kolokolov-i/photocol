@@ -19,7 +19,7 @@ import javax.persistence.*;
 public class Album {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Basic(optional = false)
     private String name;

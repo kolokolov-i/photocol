@@ -2,12 +2,9 @@ package superbro.photocol.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 import superbro.photocol.dto.DTOAlbum;
 import superbro.photocol.dto.DTOAlbumItem;
 import superbro.photocol.dto.DTOPhoto;
@@ -35,8 +32,7 @@ public class GalleryController {
     @GetMapping("/albums")
     public String albums(Model model, Principal principal) {
         model.addAttribute("title", "Мои альбомы");
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-        AppUser appUser = userService.get(loginedUser.getUsername());
+        AppUser appUser = userService.from(principal);
         List<DTOAlbumItem> albums = albumService.getUserAlbums(appUser);
         model.addAttribute("albums", albums);
         model.addAttribute("info", new DTOUserInfo(albums.size(), 0));
@@ -45,18 +41,25 @@ public class GalleryController {
 
     @GetMapping("/album/{albumId}")
     public String getAlbum(@PathVariable() Integer albumId, Model model, Principal principal) {
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-        AppUser appUser = userService.get(loginedUser.getUsername());
+        AppUser appUser = userService.from(principal);
         DTOAlbum album = albumService.getAlbum(appUser, albumId);
         model.addAttribute("title", album.getName());
         model.addAttribute("album", album);
         return "album";
     }
 
+    @PostMapping("/album_new")
+    public String newAlbum(Principal principal,
+                           @RequestParam(name = "album_name") String albumName,
+                           @RequestParam("description") String albumDescription) {
+        AppUser appUser = userService.from(principal);
+        albumService.newAlbum(appUser, albumName, albumDescription);
+        return "redirect:/albums";
+    }
+
     @GetMapping("/photo/{photoId}")
     public String getPhoto(@PathVariable() Integer photoId, Model model, Principal principal) {
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-        AppUser appUser = userService.get(loginedUser.getUsername());
+        AppUser appUser = userService.from(principal);
         try {
             DTOPhoto photo = photoService.getPhoto(appUser, photoId);
             model.addAttribute("photo", photo);

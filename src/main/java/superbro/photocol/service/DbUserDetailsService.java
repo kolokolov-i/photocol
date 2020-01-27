@@ -2,6 +2,7 @@ package superbro.photocol.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -14,6 +15,7 @@ import superbro.photocol.entity.AppUser;
 import superbro.photocol.repo.RoleRepo;
 import superbro.photocol.repo.UserRepo;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,7 +38,13 @@ public class DbUserDetailsService implements UserDetailsService {
         return new User(appUser.getName(), appUser.getPassword(), grantList);
     }
 
-    public AppUser get(String name){
+    private AppUser get(String name){
         return userRepo.getByName(name);
+    }
+
+
+    public AppUser from(Principal principal){
+        User loggedUser = (User) ((Authentication) principal).getPrincipal();
+        return get(loggedUser.getUsername());
     }
 }

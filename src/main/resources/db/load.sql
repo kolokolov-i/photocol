@@ -18,3 +18,6 @@ INSERT INTO photo (id, name, description, album, sort, path_preview, path_full)
 VALUES (1, '001.jpg', '', 1, 1, 's001.jpg', 'f001.jpg'),
        (2, '002.jpg', '', 1, 2, 's002.jpg', 'f002.jpg'),
        (3, '003.jpg', '', 2, 3, 's003.jpg', 'f003.jpg');
+
+ALTER SEQUENCE album_id_seq RESTART WITH 3;
+ALTER SEQUENCE photo_id_seq RESTART WITH 4;
