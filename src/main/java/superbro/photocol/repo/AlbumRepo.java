@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public interface AlbumRepo extends JpaRepository<Album, Integer> {
 
-    public List<Album> findAllByUser(@Param("user") AppUser user);
+    List<Album> findAllByUser(@Param("user") AppUser user);
 
-    public Album findOneByUserAndId(@Param("user") AppUser user, @Param("id") Integer id);
+    Album findOneById(@Param("id") Integer id);
 }

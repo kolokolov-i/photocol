@@ -15,7 +15,7 @@ public class UserRole {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    private int id;
     @JoinColumn(name = "app_user", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private AppUser user;

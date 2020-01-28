@@ -1,6 +1,7 @@
 package superbro.photocol.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -37,4 +38,11 @@ public interface PhotoRepo extends JpaRepository<Photo, Integer> {
                     "LIMIT 1"
     )
     Photo findNext(@Param("album") Integer album, @Param("sort") Integer sort);
+
+    @Modifying
+    @Query(
+            value = "DELETE FROM Photo f " +
+                    "WHERE f.album = :album"
+    )
+    void deleteAllFromAlbum(@Param("album") Album album);
 }

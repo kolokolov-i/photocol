@@ -15,7 +15,7 @@ public class AppRole {
 
     @Id
     @GeneratedValue
-    private Short id;
+    private short id;
     @Basic(optional = false)
     private String name;
 }

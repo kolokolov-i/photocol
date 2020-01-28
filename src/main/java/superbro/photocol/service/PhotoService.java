@@ -12,6 +12,7 @@ import superbro.photocol.entity.Photo;
 import superbro.photocol.repo.AlbumRepo;
 import superbro.photocol.repo.PhotoRepo;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,7 +45,7 @@ public class PhotoService {
     }
 
     public void addPhotos(AppUser user, Integer albumId, List<MultipartFile> files) throws IOException {
-        Album album = albumRepo.findOneByUserAndId(user, albumId);
+        Album album = albumRepo.findOneById(albumId);
         if (album == null) {
             throw new RuntimeException("security");
         }
@@ -61,5 +62,10 @@ public class PhotoService {
             throw new RuntimeException("security");
         }
         photoRepo.delete(photo);
+    }
+
+    @Transactional
+    public void deleteFromAlbum(Album album) {
+        photoRepo.deleteAllFromAlbum(album);
     }
 }

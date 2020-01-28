@@ -15,7 +15,7 @@ public class AppUser {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    private int id;
     @Basic(optional = false)
     private String name;
     @Basic(optional = false)

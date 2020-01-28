@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import superbro.photocol.dto.DTOAlbum;
 import superbro.photocol.dto.DTOAlbumItem;
+import superbro.photocol.dto.DTOPhotoItem;
 import superbro.photocol.entity.Album;
 import superbro.photocol.entity.AppUser;
 import superbro.photocol.repo.AlbumRepo;
@@ -28,7 +29,10 @@ public class AlbumsService {
     }
 
     public DTOAlbum getAlbum(AppUser user, Integer albumId){
-        Album album = repo.findOneByUserAndId(user, albumId);
+        Album album = repo.findOneById(albumId);
+        if (album.getUser().getId() != user.getId()) {
+            throw new RuntimeException("security");
+        }
         DTOAlbum result = new DTOAlbum();
         result.setId(album.getId());
         result.setName(album.getName());
@@ -43,9 +47,9 @@ public class AlbumsService {
     }
 
     public void editAlbum(AppUser user, Integer albumId, String name, String description) {
-        Album album = repo.findOneByUserAndId(user, albumId);
-        if(album == null){
-            return;
+        Album album = repo.findOneById(albumId);
+        if (album.getUser().getId() != user.getId()) {
+            throw new RuntimeException("security");
         }
         album.setName(name);
         album.setDescription(description);
@@ -53,10 +57,11 @@ public class AlbumsService {
     }
 
     public void deleteAlbum(AppUser user, Integer albumId) {
-        Album album = repo.findOneByUserAndId(user, albumId);
-        if(album == null){
-            return;
+        Album album = repo.findOneById(albumId);
+        if (album.getUser().getId() != user.getId()) {
+            throw new RuntimeException("security");
         }
+        photoService.deleteFromAlbum(album);
         repo.delete(album);
     }
 }
