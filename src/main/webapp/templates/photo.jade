@@ -37,14 +37,3 @@ block content
     #photo-box
         #photo-holder
             img(src='/file/full/#{photo.pathFull}')
-            //#carousel
-                if photo.prev
-                    #prev-photo
-                        a(href='/photo/#{photo.prev.id}')
-                            img(src='/file/preview/#{photo.prev.pathPreview}')
-                #current-photo
-                    img(src='/file/preview/#{photo.pathPreview}')
-                if photo.next
-                    #next-photo
-                        a(href='/photo/#{photo.next.id}')
-                            img(src='/file/preview/#{photo.next.pathPreview}')

@@ -5,15 +5,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import superbro.photocol.dto.DTOAlbum;
+import org.springframework.web.multipart.MultipartFile;
 import superbro.photocol.dto.DTOAlbumItem;
 import superbro.photocol.dto.DTOPhoto;
 import superbro.photocol.dto.DTOUserInfo;
 import superbro.photocol.entity.AppUser;
 import superbro.photocol.service.AlbumsService;
 import superbro.photocol.service.DbUserDetailsService;
+import superbro.photocol.service.FileService;
 import superbro.photocol.service.PhotoService;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
@@ -28,6 +31,7 @@ public class GalleryController {
     private final DbUserDetailsService userService;
     private final AlbumsService albumService;
     private final PhotoService photoService;
+    private final FileService fileService;
 
     @GetMapping("/albums")
     public String albums(Model model, Principal principal) {
@@ -50,5 +54,19 @@ public class GalleryController {
         } catch (RuntimeException e) {
             return "redirect:";
         }
+    }
+
+    @PostMapping("/photo_add")
+    public String addPhoto(@RequestParam(name = "album_id") Integer albumId,
+                           MultipartFile data,
+                           HttpServletRequest request,
+                           Model model, Principal principal){
+        AppUser appUser = userService.from(principal);
+        try {
+            fileService.upload(appUser, albumId, request, data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/album/"+albumId;
     }
 }
