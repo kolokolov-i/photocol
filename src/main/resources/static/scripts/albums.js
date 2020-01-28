@@ -20,4 +20,18 @@ $(document).ready(function(){
         $("#deleteAlbumDialog").css("display", "none");
     });
 
+    $(".js-photo-add").on("click", function (){
+        $("#addPhotoDialog").css("display", "block");
+    });
+    $("#addPhotoDialog .js-cancel").on("click", function(){
+        $("#addPhotoDialog").css("display", "none");
+    });
+
+    $(".js-photo-delete").on("click", function (){
+        $("#deletePhotoDialog").css("display", "block");
+    });
+    $("#deletePhotoDialog .js-cancel").on("click", function(){
+        $("#deletePhotoDialog").css("display", "none");
+    });
+
 });

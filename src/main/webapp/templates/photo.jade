@@ -1,7 +1,7 @@
 extends /fragments/gallery.jade
 
 block append head-scripts
-    script(src='/scripts/photo.js')
+    script(src='/scripts/albums.js')
 
 block append head-styles
     link(rel='stylesheet' href='/styles/photo.css')
@@ -13,15 +13,25 @@ block sidebar
             p #{photo.name}
             p #{photo.description}
         #btn-pane
-            if photo.prev
-                a(href = '/photo/#{photo.prev.id}')
-                    .btn Предыдущее
-            if photo.next
-                a(href = '/photo/#{photo.next.id}')
-                    .btn Следующее
+            div(style='display: flex;')
+                span.navspan
+                    if photo.prev
+                        a.nava(href = '/photo/#{photo.prev.id}')
+                            div &larr;
+                span.navspan
+                    if photo.next
+                        a.nava(href = '/photo/#{photo.next.id}')
+                            div &rarr;
             a(href='/album/#{photo.albumCode}')
                 .btn Альбом
-            .btn.js-delete Удалить
+            .btn.js-photo-delete Удалить фотографию
+        #deletePhotoDialog.dialog-box(style='display: none;')
+            .title Удалить фотографию ?
+            form(action='/photo_delete', method='post', id='formDeletePhoto', hidden)
+            input.cell(type='hidden', name='photo_id', value='#{photo.id}', form='formDeletePhoto', hidden)
+            .multi-cell
+                input.part-cell(type='submit', value='Удалить', form='formDeletePhoto')
+                input.part-cell.js-cancel(type='button', value='Отмена')
 
 block content
     #photo-box

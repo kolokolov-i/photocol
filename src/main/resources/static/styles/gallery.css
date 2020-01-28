@@ -104,3 +104,11 @@
 #sidebar .part-cell {
     flex-grow: 1;
 }
+
+#sidebar .navspan {
+    border: 1px solid var(--main-color);
+    flex-grow: 1;
+}
+#sidebar .navspan:hover {
+    background-color: var(--hover-color);
+}

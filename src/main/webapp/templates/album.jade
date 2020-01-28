@@ -11,13 +11,12 @@ block sidebar
             p Фотографий всего: #{album.photos.size()}
         #btn-pane
             .btn.js-album-edit Редактировать альбом
-            .btn.js-photo-add Добавить фотографии
-            .btn.js-photo-delete Удалить фотографии
             .btn.js-album-delete Удалить альбом
+            .btn.js-photo-add Добавить фотографии
         #editAlbumDialog.dialog-box(style='display: none;')
             .title Редактировать альбом
             form(action='/album_edit', method='post', id='formEditAlbum', hidden)
-            input.cell(type='text', name='album_id', value='#{album.id}', form='formEditAlbum', hidden)
+            input.cell(type='hidden', name='album_id', value='#{album.id}', form='formEditAlbum', hidden)
             input.cell(type='text', name='album_name', form='formEditAlbum', placeholder='Название')
             input.cell(type='text', name='description', form='formEditAlbum', placeholder='Описание')
             .multi-cell
@@ -26,9 +25,17 @@ block sidebar
         #deleteAlbumDialog.dialog-box(style='display: none;')
             .title Удалить альбом ?
             form(action='/album_delete', method='post', id='formDeleteAlbum', hidden)
-            input.cell(type='text', name='album_id', value='#{album.id}', form='formDeleteAlbum', hidden)
+            input.cell(type='hidden', name='album_id', value='#{album.id}', form='formDeleteAlbum', hidden)
             .multi-cell
                 input.part-cell(type='submit', value='Удалить', form='formDeleteAlbum')
+                input.part-cell.js-cancel(type='button', value='Отмена')
+        #addPhotoDialog.dialog-box(style='display: none;')
+            .title Добавить фотографии
+            form(action='/photo_add', method='post', id='formAddPhoto', hidden)
+            input.cell(type='hidden', name='album_id', value='#{album.id}', form='formAddPhoto', hidden)
+            input.cell(type='file', name='photo_file', form='formAddPhoto', accept='image/jpeg')
+            .multi-cell
+                input.part-cell(type='submit', value='Добавить', form='formAddPhoto')
                 input.part-cell.js-cancel(type='button', value='Отмена')
 
 block content
