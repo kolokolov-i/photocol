@@ -25,6 +25,9 @@ public class Photo {
     @JoinColumn(name = "album", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Album album;
+    @SequenceGenerator(name = "photo_sort", sequenceName = "photo_sort_sequence", allocationSize = 1, initialValue = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "sort", insertable = false, updatable = false)
     private int sort;
     @Column(name = "path_preview")
     private String pathPreview;

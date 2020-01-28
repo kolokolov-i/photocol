@@ -34,8 +34,8 @@ public class PhotoService {
         if (album.getUser().getId() != appUser.getId()) {
             throw new RuntimeException("security");
         }
-        Photo prev = photoRepo.findOneByAlbumAndSort(album, photo.getSort() - 1);
-        Photo next = photoRepo.findOneByAlbumAndSort(album, photo.getSort() + 1);
+        Photo prev = photoRepo.findPrev(album.getId(), photo.getSort());
+        Photo next = photoRepo.findNext(album.getId(), photo.getSort());
         return new DTOPhoto(photo.getId(), photo.getName(),
                 photo.getPathPreview(), photo.getPathFull(),
                 album.getId(), album.getName(),
@@ -50,6 +50,7 @@ public class PhotoService {
         }
         for (MultipartFile file: files) {
             Photo photo = fileService.upload(file, album);
+//            photo.setPathPreview();
             photoRepo.saveAndFlush(photo);
         }
     }
