@@ -1,11 +1,14 @@
 package superbro.photocol.service;
 
+import org.imgscalr.Scalr;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import superbro.photocol.entity.Album;
 import superbro.photocol.entity.Photo;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -56,6 +59,16 @@ public class FileService {
         BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(storageFile));
         stream.write(file.getBytes());
         stream.close();
-        return new Photo(0, originalName, null, album, 0, null, randomName);
+        String previewName = makePreview(storageFile);
+        return new Photo(0, originalName, null, album, 0, previewName, randomName);
+    }
+
+    private String makePreview(File storageFile) throws IOException {
+        BufferedImage image = ImageIO.read(storageFile);
+        BufferedImage previewImage = Scalr.resize(image, 160, 120);
+        String previewName = UUID.randomUUID().toString();
+        File previewFile = new File(pathPreview.toString(), previewName);
+        ImageIO.write(previewImage, "jpeg", previewFile);
+        return previewName;
     }
 }

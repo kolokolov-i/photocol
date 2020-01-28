@@ -51,7 +51,6 @@ public class PhotoService {
         }
         for (MultipartFile file: files) {
             Photo photo = fileService.upload(file, album);
-//            photo.setPathPreview();
             photoRepo.saveAndFlush(photo);
         }
     }
