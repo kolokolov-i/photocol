@@ -1,13 +1,11 @@
 package superbro.photocol.service;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import superbro.photocol.entity.AppUser;
+import superbro.photocol.entity.Album;
+import superbro.photocol.entity.Photo;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,12 +13,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.UUID;
 
+/**
+ * @author Kolokolov Ivan - kolokolov.i@ext-system.com
+ * @since 28.01.20
+ */
 @Service
-@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class FileService {
-
-    private final PhotoService photoService;
 
     private String pathBase = "storage";
     private Path pathPreview = Paths.get(pathBase, "preview");
@@ -44,12 +44,13 @@ public class FileService {
         return get(pathFull, filename);
     }
 
-    public void upload(AppUser user, Integer albumId, HttpServletRequest request, MultipartFile data) throws IOException {
-        String originalName = data.getOriginalFilename();
-        File serverFile = pathFull.resolve(originalName).toFile();
-        BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-        stream.write(data.getBytes());
+    public Photo upload(MultipartFile file, Album album) throws IOException {
+        String randomName = UUID.randomUUID().toString();
+        String originalName = file.getOriginalFilename();
+        File storageFile = new File(pathFull.toString(), randomName);
+        BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(storageFile));
+        stream.write(file.getBytes());
         stream.close();
-        photoService.addPhoto(user, originalName, originalName, albumId);
+        return new Photo(0, originalName, null, album, 0, null, randomName);
     }
 }

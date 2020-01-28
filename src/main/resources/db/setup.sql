@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS app_user CASCADE;
 DROP TABLE IF EXISTS app_role CASCADE;
 DROP TABLE IF EXISTS album CASCADE;
 DROP TABLE IF EXISTS photo CASCADE;
+DROP SEQUENCE IF EXISTS photo_sort_sequence;
 
 CREATE TABLE app_user
 (
@@ -35,13 +36,15 @@ CREATE TABLE album
   path_preview VARCHAR(100)
 );
 
+CREATE SEQUENCE photo_sort_sequence AS INTEGER START WITH 1 INCREMENT BY 1;
+
 CREATE TABLE photo
 (
   id           SERIAL4 NOT NULL PRIMARY KEY,
   name         VARCHAR(100),
   description  VARCHAR(500),
   album        INT     NOT NULL REFERENCES album (id),
-  sort         INT DEFAULT 0,
+  sort         SERIAL,
   path_preview VARCHAR(100),
   path_full    VARCHAR(100)
 );

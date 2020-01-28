@@ -13,7 +13,7 @@ block sidebar
             .btn.js-album-edit Редактировать альбом
             .btn.js-album-delete Удалить альбом
             .btn.js-photo-add Добавить фотографии
-        #editAlbumDialog.dialog-box(style='display: none;')
+        #editAlbumDialog.dialog-bo(style='display: none;')
             .title Редактировать альбом
             form(action='/album_edit', method='post', id='formEditAlbum', hidden)
             input.cell(type='hidden', name='album_id', value='#{album.id}', form='formEditAlbum', hidden)
@@ -31,9 +31,9 @@ block sidebar
                 input.part-cell.js-cancel(type='button', value='Отмена')
         #addPhotoDialog.dialog-box(style='display: none;')
             .title Добавить фотографии
-            form(action='/photo_add', method='post', id='formAddPhoto', hidden)
+            form(action='/photo_add', method='post', id='formAddPhoto', enctype='multipart/form-data', hidden)
             input.cell(type='hidden', name='album_id', value='#{album.id}', form='formAddPhoto', hidden)
-            input.cell(type='file', name='photo_file', form='formAddPhoto', accept='image/jpeg')
+            input.cell(type='file', name='photo_files', form='formAddPhoto', accept='image/jpeg', multiple)
             .multi-cell
                 input.part-cell(type='submit', value='Добавить', form='formAddPhoto')
                 input.part-cell.js-cancel(type='button', value='Отмена')
@@ -44,5 +44,6 @@ block content
             .album-block
                 a(href='/photo/#{item.id}')
                     .album-img
-                        img(src='/file/preview/#{item.pathPreview}')
+                        if item.pathPreview
+                            img(src='/file/preview/#{item.pathPreview}')
                     .album-name= item.name
