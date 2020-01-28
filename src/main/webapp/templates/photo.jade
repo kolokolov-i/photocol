@@ -29,6 +29,7 @@ block sidebar
             .title Удалить фотографию ?
             form(action='/photo_delete', method='post', id='formDeletePhoto', hidden)
             input.cell(type='hidden', name='photo_id', value='#{photo.id}', form='formDeletePhoto', hidden)
+            input.cell(type='hidden', name='album_id', value='#{photo.albumCode}', form='formDeletePhoto', hidden)
             .multi-cell
                 input.part-cell(type='submit', value='Удалить', form='formDeletePhoto')
                 input.part-cell.js-cancel(type='button', value='Отмена')
