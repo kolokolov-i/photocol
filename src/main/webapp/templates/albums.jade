@@ -30,4 +30,6 @@ block content
                     .album-img
                         if item.pathPreview
                             img(src='/file/preview/#{item.pathPreview}')
+                        else
+                            img(src='/file/noimage')
                     .album-name= item.name

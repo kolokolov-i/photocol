@@ -27,6 +27,7 @@ public class FileService {
     private Path pathFull = Paths.get(pathBase, "full");
 
     private FileSystemResource notFound = new FileSystemResource(pathBase + "/system/notfound.jpg");
+    private FileSystemResource noImage = new FileSystemResource(pathBase + "/system/noimage.jpg");
 
     private FileSystemResource get(Path path, String name){
         Path filePath = path.resolve(name);
@@ -34,6 +35,10 @@ public class FileService {
             return new FileSystemResource(filePath);
         }
         return notFound;
+    }
+
+    public FileSystemResource noImage(){
+        return noImage;
     }
 
     public FileSystemResource getPreview(String filename) {

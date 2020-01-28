@@ -28,5 +28,10 @@ public class FileController {
     public FileSystemResource getFull(@PathVariable("filename") String filename){
         return fileService.getFull(filename);
     }
+    @GetMapping("/noimage")
+    @ResponseBody
+    public FileSystemResource noImage(){
+        return fileService.noImage();
+    }
 
 }
