@@ -10,7 +10,10 @@ block sidebar
     #side-fantom
     #sidebar
         #info-pane
-            p #{photo.description}
+            if photo.description
+                p #{photo.description}
+            else
+                p(style='color:var(--second-color);') Описание отсутствует
         #btn-pane
             div.navpane
                 span.navspan
@@ -35,5 +38,7 @@ block sidebar
 
 block content
     #photo-box
-        #photo-holder
+        img(src='/file/full/#{photo.pathFull}')
+        //#photo-holder
             img(src='/file/full/#{photo.pathFull}')
+    //#photo_container(style='border: 1px solid black;position: fixed;top: 50px;left: 230px;right: 10px;bottom: 10px;')
