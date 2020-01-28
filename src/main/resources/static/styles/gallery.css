@@ -112,3 +112,15 @@
 #sidebar .navspan:hover {
     background-color: var(--hover-color);
 }
+
+#sidebar .navpane {
+    display: flex;
+    height: 30px;
+}
+
+#sidebar .nava {
+    display: block;
+    height: 100%;
+    text-align: center;
+    font-size: 16pt;
+}

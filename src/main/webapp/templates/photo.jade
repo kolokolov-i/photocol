@@ -10,18 +10,17 @@ block sidebar
     #side-fantom
     #sidebar
         #info-pane
-            p #{photo.name}
             p #{photo.description}
         #btn-pane
-            div(style='display: flex;')
+            div.navpane
                 span.navspan
                     if photo.prev
                         a.nava(href = '/photo/#{photo.prev.id}')
-                            div &larr;
+                            i.fas.fa-arrow-left
                 span.navspan
                     if photo.next
                         a.nava(href = '/photo/#{photo.next.id}')
-                            div &rarr;
+                            i.fas.fa-arrow-right
             a(href='/album/#{photo.albumCode}')
                 .btn Альбом
             .btn.js-photo-delete Удалить фотографию

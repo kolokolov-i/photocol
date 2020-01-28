@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import superbro.photocol.dto.DTOAlbum;
+import superbro.photocol.dto.DTOAlbumItem;
+import superbro.photocol.dto.DTOUserInfo;
 import superbro.photocol.entity.AppUser;
 import superbro.photocol.service.AlbumsService;
 import superbro.photocol.service.DbUserDetailsService;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
@@ -21,6 +24,16 @@ public class AlbumController {
 
     private final DbUserDetailsService userService;
     private final AlbumsService albumService;
+
+    @GetMapping("/albums")
+    public String albums(Model model, Principal principal) {
+        model.addAttribute("title", "Мои альбомы");
+        AppUser appUser = userService.from(principal);
+        List<DTOAlbumItem> albums = albumService.getUserAlbums(appUser);
+        model.addAttribute("albums", albums);
+        model.addAttribute("info", new DTOUserInfo(albums.size(), 0));
+        return "albums";
+    }
 
     @GetMapping("/album/{albumId}")
     public String getAlbum(@PathVariable() Integer albumId, Model model, Principal principal) {
