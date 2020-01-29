@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import superbro.photocol.dto.DTOAlbum;
 import superbro.photocol.dto.DTOAlbumItem;
+import superbro.photocol.dto.DTOPhoto;
 import superbro.photocol.dto.DTOPhotoItem;
 import superbro.photocol.entity.Album;
 import superbro.photocol.entity.AppUser;
@@ -46,13 +47,19 @@ public class AlbumsService {
         repo.saveAndFlush(album);
     }
 
-    public void editAlbum(AppUser user, Integer albumId, String name, String description) {
+    public void editAlbum(AppUser user, Integer albumId, String albumName, int preview, String description) {
         Album album = repo.findOneById(albumId);
         if (album.getUser().getId() != user.getId()) {
             throw new RuntimeException("security");
         }
-        album.setName(name);
+        if(albumName != null && !albumName.isEmpty()){
+            album.setName(albumName);
+        }
         album.setDescription(description);
+        if(preview != -1){
+            DTOPhoto previewPhoto = photoService.getPhoto(user, preview);
+            album.setPathPreview(previewPhoto.getPathPreview());
+        }
         repo.saveAndFlush(album);
     }
 

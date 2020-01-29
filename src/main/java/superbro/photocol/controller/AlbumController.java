@@ -41,6 +41,7 @@ public class AlbumController {
         DTOAlbum album = albumService.getAlbum(appUser, albumId);
         model.addAttribute("title", album.getName());
         model.addAttribute("album", album);
+//        model.addAttribute("selectPreview", album.);
         return "album";
     }
 
@@ -57,9 +58,10 @@ public class AlbumController {
     public String editAlbum(Principal principal,
                             @RequestParam(name = "album_id") Integer albumId,
                             @RequestParam(name = "album_name") String albumName,
+                            @RequestParam(name = "preview", defaultValue = "-1") Integer preview,
                             @RequestParam(name = "description", required = false) String albumDescription) {
         AppUser appUser = userService.from(principal);
-        albumService.editAlbum(appUser, albumId, albumName, albumDescription);
+        albumService.editAlbum(appUser, albumId, albumName, preview, albumDescription);
         return "redirect:/album/" + albumId;
     }
 
