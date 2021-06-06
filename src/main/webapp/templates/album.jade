@@ -19,6 +19,10 @@ block sidebar
             input.cell(type='hidden', name='album_id', value='#{album.id}', form='formEditAlbum', hidden)
             input.cell(type='text', name='album_name', form='formEditAlbum', placeholder='Название')
             input.cell(type='text', name='description', form='formEditAlbum', placeholder='Описание')
+            select.cell(name='preview', form='formEditAlbum', style='width: 100%;')
+                option(value='-1') Не выбрано
+                each item in album.photos
+                    option(value='#{item.id}') #{item.name}
             .multi-cell
                 input.part-cell(type='submit', value='Изменить', form='formEditAlbum')
                 input.part-cell.js-cancel(type='button', value='Отмена')
